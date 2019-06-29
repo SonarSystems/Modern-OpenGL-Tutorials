@@ -86,6 +86,16 @@ public:
         // Delete the shaders as they're linked into our program now and no longer necessery
         glDeleteShader( vertex );
         glDeleteShader( fragment );
+        glDetachShader( this->Program, vertex );
+        glDetachShader( this->Program, fragment );
+        // Confirming the deletion of the shaders 
+        GLint result;
+        glGetShaderiv( vertex, GL_DELETE_STATUS, &result );
+        if (result == GL_TRUE) // if true means that it's not deleted and just flagged 
+            std::cout << "ERROR::SHADER::VERTEX::DELETION_FAILED\n" << std::endl;
+        glGetShaderiv( fragment, GL_DELETE_STATUS, &result );
+        if (result == GL_TRUE) // if true means that it's not deleted and just flagged 
+            std::cout << "ERROR::SHADER::FRAGMENT::DELETION_FAILED\n" << std::endl;
         
     }
     // Uses the current shader
